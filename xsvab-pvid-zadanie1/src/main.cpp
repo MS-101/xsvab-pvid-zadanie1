@@ -81,7 +81,7 @@ void countCancerCells()
 
 	// contour detection
 
-	detectObjects(input, threshold, 0, cv::RETR_CCOMP, false, outputDir, outputExtension);
+	detectObjects(input, threshold, 0, cv::RETR_EXTERNAL, false, outputDir, outputExtension);
 	cv::waitKey();
 }
 
@@ -160,7 +160,7 @@ void countBloodCells()
 	outputImage(allBloodCells, "allBloodCells", outputDir, outputExtension);
 
 	cv::Mat whiteBloodCells;
-	cv::threshold(green, whiteBloodCells, 150, 255, cv::THRESH_BINARY);
+	cv::threshold(gauss, whiteBloodCells, 150, 255, cv::THRESH_BINARY);
 	cv::bitwise_not(whiteBloodCells, whiteBloodCells);
 	cv::dilate(whiteBloodCells, whiteBloodCells, kernel);
 	outputImage(whiteBloodCells, "whiteBloodCells", outputDir, outputExtension);
